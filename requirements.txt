@@ -1,0 +1,6 @@
+Django==1.7
+Werkzeug==0.9.6
+django-extensions==1.4.0
+pyjade==3.0.0
+six==1.7.3
+wsgiref==0.1.2
