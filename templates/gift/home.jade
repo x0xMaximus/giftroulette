@@ -30,7 +30,7 @@ block content
 block post-footer
   script
     var handler = StripeCheckout.configure({
-      key: 'pk_test_Him5yi2rwrsU44GIHpQONdlM',
+      key: 'pk_live_zrWBjqy6BaVQ2jmxulLHPKIt',
       token: function(token) {
         $('#stripe-token').val(token.id);
         $('form').submit();
