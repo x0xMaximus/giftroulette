@@ -1,0 +1,17 @@
+[
+{
+    "fields": {
+        "registration_required": false,
+        "title": "About Gift Roulette",
+        "url": "/about/",
+        "template_name": "",
+        "sites": [
+            1
+        ],
+        "content": "<div class='container about-page'>\r\n  <div class='row'>\r\n    <div class='col-xs-12'><h1>What</h1></div>\r\n    <div class='col-xs-10 col-xs-offset-1'>\r\n      <p>Gift Roulette is a gift curation service and randomization tool.</p>\r\n      <p>Send yourself, friends, or strangers something unique based on your preferences. Each gift is hand selected by one the gift roulette agents and you will probably like it.</p>\r\n      <p>Gift Roulette is an <a href='https://github.com/GRL/giftroulette'>open source project</a>.</p>\r\n    </div>\r\n\r\n    <div class='col-xs-12'><h1>Who</h1></div>\r\n    <div class='col-xs-10 col-xs-offset-1'>\r\n      <div class='row'>\r\n        <div class='col-xs-4'><a href='https://twitter.com/x0xMaximus' target='_blank'><img src='/static/images/max.jpg' class='img-responsive' /></a></div>\r\n        <div class='col-xs-4'><a href='https://twitter.com/ryeskelton' target='_blank'><img src='/static/images/rye.jpg' class='img-responsive' /></a></div>\r\n        <div class='col-xs-4'><a href='https://twitter.com/justfouryou', target='_blank'><img src='/static/images/ali.jpg' class='img-responsive' /></a></div>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n</div>",
+        "enable_comments": false
+    },
+    "model": "flatpages.flatpage",
+    "pk": 1
+}
+]
