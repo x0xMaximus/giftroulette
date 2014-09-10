@@ -22,7 +22,7 @@ def provider_post_save(sender, instance, **kwargs):
             gift.stripe_token = '[used]'
             gift.save()
 
-            send_mail('[Gift Roulette] New Order!', '{gift} :: ${price}'.format(gift=gift, price=gift.price), settings.SERVER_EMAIL, [email[1] for email in settings.MANAGERS])
+            send_mail('[Gift Roulette] New Order!', '{gift} :: ${price}'.format(gift=gift, price=gift.get_price_display()), settings.SERVER_EMAIL, [email[1] for email in settings.MANAGERS])
 
         except stripe.CardError, e:
             pass

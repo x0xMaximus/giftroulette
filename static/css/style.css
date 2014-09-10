@@ -1,5 +1,12 @@
-.space-top { margin-top: 60px; }
-.space-top-xl { margin-top: 120px; }
+.header-space { margin-top: 20px; }
+.footer-space { margin-bottom: 20px; }
+.header-space-xl { margin-top: 60px; }
+.footer-space-xl { margin-bottom: 60px; }
+
+.navbar-default {
+ background-color: #fff;
+ border: none;
+}
 
 input:focus,
 input:before,
@@ -11,8 +18,11 @@ button:active,
     outline: none;
 }
 
-.gift-text {
+body {
   font-family: 'Px Grotesk Light';
+}
+
+.gift-text {
   font-size: 2.6em;
   text-transform: lowercase;
 }
@@ -22,7 +32,6 @@ button:active,
   -moz-appearance: none;
   appearance: none;
   border: none;
-  /*border-bottom: 2px solid black;*/
   background: #fff;
   font-family: 'Px Grotesk Light Italic';
 }
@@ -35,7 +44,6 @@ option {
   font-family: 'Px Grotesk Light Italic';
   font-size: 2em;
   color: #606060;
-  width: 100%;
   border: none;
   padding: 4px;
 }
@@ -44,7 +52,16 @@ option {
   background-color: #9b24ff;
   color: #fff;
   text-transform: uppercase;
-  font-family: 'Px Grotesk Light';
   border-radius: 0px;
   font-size: 1.4em;
+}
+
+.about-page {
+  font-size: 1.6em;
+}
+
+.about-page h1 {
+  color: #9b24ff;
+  text-transform: uppercase;
+  font-size: 4em;
 }
