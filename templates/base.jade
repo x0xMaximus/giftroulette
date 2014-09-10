@@ -5,40 +5,31 @@ html.no-js(lang='en')
 head
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(property='og:title', content='foo')
-    meta(property='og:image', content='http://example-domain/logo.png')
+    meta(property='og:title', content='Gift Roulette')
+    meta(property='og:image', content='http://giftroulette.me/static/images/gift-logo.png')
 
-    title foo
+    title Gift Roulette
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+    link(rel='stylesheet', href='#{STATIC_URL}fonts/PxGrotesk-font.css')
     link(rel='stylesheet', href='#{STATIC_URL}css/style.css')
-    link(rel='stylesheet', href='#{STATIC_URL}css/document-style.css')
 
 body
-    block header
     block content
-    block pre-footer
-    block footer
 
-        script(src='#{STATIC_URL}js/libs/jquery-2.1.1.min.js')
-        script(src='#{STATIC_URL}js/libs/bootstrap.min.js')
-        script(src='#{STATIC_URL}js/libs/bootstrap-switch.min.js')
-        script(src='#{STATIC_URL}js/libs/underscore.js')
-        script(src='#{STATIC_URL}js/libs/underscore.string.js')
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='https://checkout.stripe.com/checkout.js')
+    script(src='#{STATIC_URL}js/app.js')
 
-        script(src='#{STATIC_URL}js/libs/backbone.js')
-        script(src='#{STATIC_URL}js/libs/backbone.marionette.js')
-
-        script(src='#{STATIC_URL}js/app.js')
-        - if not debug
-          script.
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-123123123');
-            _gaq.push(['_setDomainName', 'example-domain.org']);
-            _gaq.push(['_trackPageview']);
-            (function() {
-              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
+    - if not debug
+      script.
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-51345171-2']);
+        _gaq.push(['_setDomainName', 'giftroulette.me']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
 
     block post-footer
-

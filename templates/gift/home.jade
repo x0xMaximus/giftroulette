@@ -1,4 +1,63 @@
 extends base
 
+- load widget_tweaks
+
 block content
-  p.lead Something {theme} that is {color} and is about {price} chosen by {curator} delivered to any {address}.
+  .container
+    .row.space-top-xl
+      .col-md-8.col-md-offset-3
+
+        form(method='post', role='form')
+          - csrf_token
+          input#stripe-token(type='hidden', name='stripe_token', value='')
+
+          .form-group
+            p.gift-text Something #{form.theme}
+            p.gift-text that is #{form.color}
+            p.gift-text costs about #{form.price}
+            p.gift-text chosen by a #{form.curator}
+
+          .form-group.space-top
+            - if form.address.errors
+              p.gift-text.text-danger Please enter an address field
+
+            #{form.address|add_class:'text-center'|attr:'placeholder:635 C St #506 San Diego, CA 92101'}
+
+          .form-group.space-top.text-center
+            input(type='submit', value='Gift Roulette').btn.btn-default
+
+
+block post-footer
+  script
+    var handler = StripeCheckout.configure({
+      key: 'pk_test_Him5yi2rwrsU44GIHpQONdlM',
+      token: function(token) {
+        $('#stripe-token').val(token.id);
+        $('form').submit();
+      }
+    });
+
+    $('.btn-default').click(function(e) {
+      var price = $('#id_price').val(), amount = 0;
+      switch(price) {
+        case '0':
+          amount = 2000;
+          break;
+        case '1':
+          amount = 5000;
+          break;
+        case '2':
+          amount = 10000;
+          break;
+        case '3':
+          amount = 20000;
+          break;
+      }
+
+      handler.open({
+        name: 'Gift Roulette',
+        amount: amount
+      });
+      e.preventDefault();
+    });
+

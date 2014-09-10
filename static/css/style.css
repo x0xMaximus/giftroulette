@@ -1,0 +1,50 @@
+.space-top { margin-top: 60px; }
+.space-top-xl { margin-top: 120px; }
+
+input:focus,
+input:before,
+select:focus,
+textarea:focus,
+button:focus,
+button:active,
+:focus {
+    outline: none;
+}
+
+.gift-text {
+  font-family: 'Px Grotesk Light';
+  font-size: 2.6em;
+  text-transform: lowercase;
+}
+
+.gift-text select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  /*border-bottom: 2px solid black;*/
+  background: #fff;
+  font-family: 'Px Grotesk Light Italic';
+}
+
+option {
+  display: none;
+}
+
+#id_address {
+  font-family: 'Px Grotesk Light Italic';
+  font-size: 2em;
+  color: #606060;
+  width: 100%;
+  border: none;
+  padding: 4px;
+}
+
+.btn.btn-default {
+  background-color: #9b24ff;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: 'Px Grotesk Light';
+  border-radius: 0px;
+  font-size: 1.4em;
+}

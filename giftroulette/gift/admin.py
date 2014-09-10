@@ -1,3 +1,5 @@
 from django.contrib import admin
+from giftroulette.gift.models import Gift
 
-# Register your models here.
+
+admin.site.register(Gift)
