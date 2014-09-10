@@ -2,6 +2,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from giftroulette.gift.models import Gift
 from django.conf import settings
+from django.core.mail import send_mail
 
 import stripe
 
@@ -20,6 +21,9 @@ def provider_post_save(sender, instance, **kwargs):
             )
             gift.stripe_token = '[used]'
             gift.save()
+
+            send_mail('[Gift Roulette] New Order!', '{gift} :: ${price}'.format(gift=gift, price=gift.price), settings.SERVER_EMAIL, [email[1] for email in settings.MANAGERS])
+
         except stripe.CardError, e:
             pass
 
