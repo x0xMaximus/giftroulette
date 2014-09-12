@@ -1,6 +1,7 @@
 from django import forms
 from giftroulette.gift.models import Gift
 
+
 class GiftForm(forms.ModelForm):
     class Meta:
         model = Gift

@@ -10,7 +10,7 @@ class Gift(models.Model):
     DUMB = 5
     TINY = 6
     SEASONAL = 7
-    THEME_TYPE_CHOICE = (
+    THEME_CHOICES = (
         (WHATEVER, 'Whatever'),
         (CUTE, 'Cute'),
         (TERRIFYING, 'Terrifying'),
@@ -20,21 +20,21 @@ class Gift(models.Model):
         (TINY, 'Tiny'),
         (SEASONAL, 'Seasonal')
     )
-    theme = models.IntegerField(choices=THEME_TYPE_CHOICE, default=WHATEVER)
+    theme = models.IntegerField(choices=THEME_CHOICES, default=WHATEVER)
 
     BLACK = 0
     WHITE = 1
     YELLOW = 2
     BLUE = 3
     RED = 4
-    COLOR_TYPE_CHOICES = (
+    COLOR_CHOICES = (
         (BLACK, 'Black'),
         (WHITE, 'White'),
         (YELLOW, 'Yellow'),
         (BLUE, 'Blue'),
         (RED, 'Red')
     )
-    color = models.IntegerField(choices=COLOR_TYPE_CHOICES, default=BLACK)
+    color = models.IntegerField(choices=COLOR_CHOICES, default=BLACK)
 
     TWENTY = 0
     FIFTY = 1
@@ -56,7 +56,7 @@ class Gift(models.Model):
     ROMANTIC = 5
     KID = 6
     ELDERLY = 7
-    CURATOR_TYPE_CHOICES = (
+    CURATOR_CHOICES = (
         (HUMAN, 'Human'),
         (PARENT, 'Parent'),
         (ARTIST, 'Artist'),
@@ -66,8 +66,7 @@ class Gift(models.Model):
         (KID, 'Kid'),
         (ELDERLY, 'Elder')
     )
-    curator = models.IntegerField(choices=CURATOR_TYPE_CHOICES, default=HUMAN)
-
+    curator = models.IntegerField(choices=CURATOR_CHOICES, default=HUMAN)
 
     NEW = 0
     PROCESSING = 1
@@ -87,12 +86,11 @@ class Gift(models.Model):
 
     def __unicode__(self):
         return u'[{status}] {theme} {color} {price} {curator}'.format(
-                status=self.get_status_display(),
-                theme=self.get_theme_display(),
-                color=self.get_color_display(),
-                price=self.get_price_display(),
-                curator=self.get_curator_display())
-
+            status=self.get_status_display(),
+            theme=self.get_theme_display(),
+            color=self.get_color_display(),
+            price=self.get_price_display(),
+            curator=self.get_curator_display())
 
     def get_amount_cents(self):
         if self.price == 0:
