@@ -24,13 +24,13 @@ block content
             #{form.address|add_class:'text-center'|add_class:'btn-block'|attr:'placeholder:3624 Wilshire Ter. San Diego, CA 92104'}
 
           .form-group.header-space.text-center
-            input(type='submit', value='Gift Roulette').btn.btn-default
+            input(id='id_submit_gift', type='submit', value='Gift Roulette').btn.btn-default
 
 
 block post-footer
   script
     var handler = StripeCheckout.configure({
-      key: 'pk_live_zrWBjqy6BaVQ2jmxulLHPKIt',
+      key: '{{stripe_js_key}}',
       token: function(token) {
         $('#stripe-token').val(token.id);
         $('form').submit();

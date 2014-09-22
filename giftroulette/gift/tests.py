@@ -1,5 +1,7 @@
-from django.test import TestCase
+from django.test import TestCase, LiveServerTestCase
 from django.test.client import Client as WebClient
+
+from selenium.webdriver.firefox.webdriver import WebDriver
 
 from giftroulette.gift.models import Gift
 
@@ -29,3 +31,35 @@ class GiftTestCase(TestCase):
             self.assertEquals(r.status_code, 302)
 
         self.assertEquals(Gift.objects.count(), test_iterations)
+
+
+class FunctionalCardTests(LiveServerTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.selenium = WebDriver()
+        super(FunctionalCardTests, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super(FunctionalCardTests, cls).tearDownClass()
+
+    def test_login(self):
+        self.selenium.get(self.live_server_url)
+
+        print self.selenium.find_element_by_id('id_address')
+        print self.selenium.find_element_by_css_selector('span.option')
+
+        address_input = self.selenium.find_element_by_id('id_address')
+        address_input.send_keys('123 Sunnyvale Drive, Happy City, CA 92101')
+
+        giftroulette_button = self.selenium.find_element_by_id('id_submit_gift')
+        giftroulette_button.click()
+
+        # self.selenium.switchTo().frame('stripe_checkout_app')
+        # stripe_email = self.selenium.find_element_by_id('email')
+        # stripe_email.send_keys('john.doe@gmail.com')
+        # stripe_card_number = self.selenium.find_element_by_id('card_number')
+        # stripe_card_number.send_keys('4242 4242 4242 4242')
+        # self.selenium.switchTo().defaultContent()
