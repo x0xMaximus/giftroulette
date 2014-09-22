@@ -4,18 +4,14 @@
 .footer-space-xl { margin-bottom: 60px; }
 
 .navbar-default {
- background-color: #fff;
- border: none;
+  background-color: #fff;
+  border: none;
 }
 
 input:focus,
 input:before,
-select:focus,
-textarea:focus,
-button:focus,
-button:active,
 :focus {
-    outline: none;
+  outline: none;
 }
 
 body {
@@ -25,19 +21,29 @@ body {
 .gift-text {
   font-size: 2.6em;
   text-transform: lowercase;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .gift-text select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  background: #fff;
-  font-family: 'Px Grotesk Light Italic';
+  display: none;
 }
 
-option {
-  display: none;
+.gift-text span.option {
+  font-family: 'Px Grotesk Light Italic';
+  cursor: pointer;
+  border-bottom: 4px solid #9b24ff;
+}
+
+.gift-text span.option:hover {
+  color: #fff;
+  background-color: #9b24ff;
+  border-bottom: 1px solid white;
 }
 
 #id_address {

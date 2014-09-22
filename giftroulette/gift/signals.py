@@ -28,7 +28,7 @@ def provider_post_save(sender, instance, **kwargs):
                 gift.save()
 
                 send_mail('[Gift Roulette] New Order!',
-                        '{gift}'.format(gift=gift),
+                        '{gift} {address}'.format(gift=gift, address=gift.address),
                         settings.SERVER_EMAIL,
                         [email[1] for email in settings.MANAGERS])
 
