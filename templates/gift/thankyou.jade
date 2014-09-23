@@ -3,17 +3,27 @@ extends base
 - load widget_tweaks
 
 block content
-  .container
-    .row.space-top-xl
-      .col-md-6.col-md-offset-3
-        p.gift-text.text-success.text-center Thank you!
+  .container.thanks-page
 
-    .row.space-top
-      .col-md-8.col-md-offset-3
+    .row
+      .col-md-6.col-md-offset-3
+        h1.text-center Thank you!
+
+    .row.header-space
+      .col-xs-12.text-center
+        a(href="https://twitter.com/intent/tweet?button_hashtag=giftrouletteme&text={{gift.get_story_text}} on http://giftroulette.me").btn.btn-default
+          | Share your gift!
+
+    .row.header-space
+      .col-xs-12.text-center
           p.gift-text Something #{gift.get_theme_display}
           p.gift-text that is #{gift.get_color_display}
           p.gift-text costs about #{gift.get_price_display}
           p.gift-text chosen by a #{gift.get_curator_display}
+          p.gift-text Is on it's way to #{gift.address}
+          p.gift-text.text-muted
+            small (and will arrive in 2-3 days)
 
-      .col-md-8.col-md-offset-3
-        p.gift-text Is on it's way to #{gift.address}
+
+
+
