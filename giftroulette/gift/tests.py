@@ -48,9 +48,6 @@ class FunctionalCardTests(LiveServerTestCase):
     def test_login(self):
         self.selenium.get(self.live_server_url)
 
-        print self.selenium.find_element_by_id('id_address')
-        print self.selenium.find_element_by_css_selector('span.option')
-
         address_input = self.selenium.find_element_by_id('id_address')
         address_input.send_keys('123 Sunnyvale Drive, Happy City, CA 92101')
 

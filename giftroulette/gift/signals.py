@@ -15,16 +15,19 @@ def provider_post_save(sender, instance, **kwargs):
 
     if 'test' not in sys.argv:
 
-        if gift.stripe_token is not '[used]':
+        if not gift.stripe_id:
             stripe.api_key = settings.STRIPE_API_KEY
             try:
-                stripe.Charge.create(
+                stripe_charge = stripe.Charge.create(
                     amount=gift.get_amount_cents(),
                     currency='usd',
                     card=gift.stripe_token,
                     description='Gift Roulette'
                 )
+
                 gift.stripe_token = '[used]'
+                gift.stripe_id = stripe_charge.get('id')
+                gift.stripe_name = stripe_charge.get('card', {}).get('name')
                 gift.save()
 
                 if not settings.DEBUG:

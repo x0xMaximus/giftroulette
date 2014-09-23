@@ -11,7 +11,7 @@ def home(request):
         form = GiftForm(request.POST)
         if form.is_valid():
             gift = form.save()
-            return redirect('giftroulette.gift.views.thankyou', gift.pk)
+            return redirect('giftroulette.gift.views.thankyou', gift.private_hash)
     else:
         form = GiftForm()
 
@@ -20,8 +20,8 @@ def home(request):
                               context_instance=RequestContext(request))
 
 
-def thankyou(request, gift_id):
-    gift = get_object_or_404(Gift, pk=gift_id)
+def thankyou(request, gift_hash):
+    gift = get_object_or_404(Gift, private_hash=gift_hash)
     return render_to_response('gift/thankyou.jade',
                               {'gift': gift},
                               context_instance=RequestContext(request))

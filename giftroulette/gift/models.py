@@ -1,7 +1,14 @@
 from django.db import models
+import os
+
+
+def _createHash():
+    return os.urandom(10).encode('hex')
 
 
 class Gift(models.Model):
+    private_hash = models.CharField(max_length=20, default=_createHash, unique=True)
+
     WHATEVER = 0
     CUTE = 1
     TERRIFYING = 2
@@ -77,9 +84,13 @@ class Gift(models.Model):
         (SHIPPED, 'Shipped'),
     )
     status = models.IntegerField(choices=STATUS_CHOICES, default=NEW)
+    asin = models.CharField(max_length=10, blank=True)
 
     address = models.CharField(max_length=200)
+
     stripe_token = models.CharField(max_length=40)
+    stripe_id = models.CharField(max_length=40, blank=True)
+    stripe_name = models.CharField(max_length=200, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
