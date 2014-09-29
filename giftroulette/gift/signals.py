@@ -17,7 +17,7 @@ def image_post_save(sender, instance, **kwargs):
 
         if image.gift:
             send_mail('[Gift Roulette] New Image Uploaded!',
-                        'New upload: http://giftroulette.me/static{picture} for Gift ID: {gift_id} // {gift}'.format(
+                        'New upload: http://giftroulette.me{picture} for Gift ID: {gift_id} // {gift}'.format(
                         picture=image.image.url,
                         gift_id=image.gift.pk,
                         gift=image.gift),
