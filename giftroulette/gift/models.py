@@ -118,6 +118,14 @@ class Gift(models.Model):
             price=self.get_price_display(),
             curator=self.get_curator_display())
 
+    def get_description_text(self):
+        return u"something {theme}, that's {color}, costs about {price} and chosen by a {curator}".format(
+            theme=self.get_theme_display(),
+            color=self.get_color_display(),
+            price=self.get_price_display(),
+            curator=self.get_curator_display())
+
+
     def get_amount_cents(self):
         if self.price == 0:
             return 2000
