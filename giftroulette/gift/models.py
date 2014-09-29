@@ -99,6 +99,7 @@ class Gift(models.Model):
     stripe_name = models.CharField(max_length=200, blank=True)
 
     customer_feedback = models.TextField(blank=True)
+    follow_up_sent = models.BooleanField(default=False)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

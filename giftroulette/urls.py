@@ -10,7 +10,6 @@ urlpatterns = patterns('',
     url(r'^gift/(?P<gift_hash>\w+)/upload/$', 'giftroulette.gift.views.upload', name='upload'),
     url(r'^gift/(?P<gift_hash>\w+)/email/$', 'giftroulette.gift.views.email', name='email'),
 
-
     (r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<url>.*/)$', views.flatpage),
