@@ -10,7 +10,7 @@ import sys
 
 
 @receiver(post_save, sender=Image)
-def provider_post_save(sender, instance, **kwargs):
+def image_post_save(sender, instance, **kwargs):
     image = instance
 
     if 'test' not in sys.argv:
@@ -26,7 +26,7 @@ def provider_post_save(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Gift)
-def provider_post_save(sender, instance, **kwargs):
+def gift_post_save(sender, instance, **kwargs):
     gift = instance
 
     if 'test' not in sys.argv:
