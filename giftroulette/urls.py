@@ -4,7 +4,11 @@ from django.contrib.flatpages import views
 
 urlpatterns = patterns('',
     url(r'^$', 'giftroulette.gift.views.home', name='home'),
-    url(r'^thankyou/(?P<gift_hash>\w+)/$', 'giftroulette.gift.views.thankyou', name='thankyou'),
+
+    url(r'^gift/(?P<gift_hash>\w+)/$', 'giftroulette.gift.views.gift_read', name='gift_read'),
+    url(r'^gift/(?P<gift_hash>\w+)/thankyou/$', 'giftroulette.gift.views.thankyou', name='thankyou'),
+    url(r'^gift/(?P<gift_hash>\w+)/upload/$', 'giftroulette.gift.views.upload', name='upload'),
+
     (r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<url>.*/)$', views.flatpage),

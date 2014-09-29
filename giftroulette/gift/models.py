@@ -1,9 +1,15 @@
 from django.db import models
+
 import os
 
 
 def _createHash():
     return os.urandom(10).encode('hex')
+
+
+def _content_file_name(instance, filename):
+    name = _createHash() + os.path.splitext(filename)[1]
+    return '/'.join(['images', name])
 
 
 class Gift(models.Model):
@@ -92,6 +98,8 @@ class Gift(models.Model):
     stripe_id = models.CharField(max_length=40, blank=True)
     stripe_name = models.CharField(max_length=200, blank=True)
 
+    customer_feedback = models.TextField(blank=True)
+
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -122,3 +130,12 @@ class Gift(models.Model):
 
         if self.price == 3:
             return 20000
+
+
+class Image(models.Model):
+    image = models.ImageField(upload_to = _content_file_name, default = 'images/logo.jpg')
+    gift = models.ForeignKey(Gift, null=True, blank=True, default = None)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return u'#{image_id} for {gift}'.format(image_id=self.id, gift=self.gift)

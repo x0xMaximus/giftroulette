@@ -30,6 +30,10 @@ body {
   user-select: none;
 }
 
+.small .gift-text {
+  font-size: 2em;
+}
+
 .gift-text select {
   display: none;
 }

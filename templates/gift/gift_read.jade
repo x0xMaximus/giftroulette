@@ -1,0 +1,48 @@
+extends base
+
+- load widget_tweaks
+
+block content
+  .container.thanks-page
+
+    .row.header-space
+      .col-xs-12.text-center
+        h1 Share your experience!
+
+    .row
+      .col-xs-10.col-xs-offset-1
+        form(id="upload", action="upload/").dropzone
+          - csrf_token
+
+    .row
+      .col-xs-12
+        h2.text-center Feedback / Suggestions / Thoughts
+      .col-xs-10.col-xs-offset-1
+        form(method='post', role='form')
+          - csrf_token
+          .form-group
+            #{form.customer_feedback|add_class:'form-control'}
+          .row
+            .col-xs-4.col-xs-offset-4
+              input(type='submit', value='Submit').btn.btn-default.btn-block
+
+
+    .row.header-space-xl
+      .col-xs-12.text-center.small
+          p.gift-text Something #{gift.get_theme_display}
+          p.gift-text that is #{gift.get_color_display}
+          p.gift-text costs about #{gift.get_price_display}
+          p.gift-text chosen by a #{gift.get_curator_display}
+          p.gift-text (#{gift.address})
+
+
+block post-footer
+  script(src='#{STATIC_URL}js/dropzone.min.js')
+  script
+    Dropzone.options.upload = {
+      maxFiles: 10,
+      acceptedFiles: "image/*",
+      maxFilesize: 3,
+      paramName : 'image',
+      createImageThumbnails : false,
+    };

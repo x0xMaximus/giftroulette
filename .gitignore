@@ -3,3 +3,4 @@ db.sqlite3
 giftroulette/settings.py
 gift/migrations
 static/fonts/*
+static/media/*
