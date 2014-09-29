@@ -14,10 +14,15 @@ def provider_post_save(sender, instance, **kwargs):
     image = instance
 
     if 'test' not in sys.argv:
-        send_mail('[Gift Roulette] New Image Uploaded!',
-                  'http://giftroulette.me{image}'.format(image=image.image.url),
-                   settings.SERVER_EMAIL,
-                   [email[1] for email in settings.MANAGERS])
+
+        if image.gift:
+            send_mail('[Gift Roulette] New Image Uploaded!',
+                      'http://giftroulette.me/static{image} for Gift ID: {gift_id} // {gift}'.format(
+                        image=image.image.url,
+                        gift_id=image.gift.pk,
+                        gift=image.gift),
+                      settings.SERVER_EMAIL,
+                      [email[1] for email in settings.MANAGERS])
 
 
 @receiver(post_save, sender=Gift)
