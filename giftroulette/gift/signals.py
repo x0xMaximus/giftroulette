@@ -17,8 +17,8 @@ def provider_post_save(sender, instance, **kwargs):
 
         if image.gift:
             send_mail('[Gift Roulette] New Image Uploaded!',
-                      'http://giftroulette.me/static{image} for Gift ID: {gift_id} // {gift}'.format(
-                        image=image.image.url,
+                        'New upload: http://giftroulette.me/static{picture} for Gift ID: {gift_id} // {gift}'.format(
+                        picture=image.image.url,
                         gift_id=image.gift.pk,
                         gift=image.gift),
                       settings.SERVER_EMAIL,
@@ -33,7 +33,7 @@ def provider_post_save(sender, instance, **kwargs):
 
         if gift.customer_feedback:
             send_mail('[Gift Roulette] New Feedback!',
-                      '{comment}'.format(comment=gift.customer_feedback),
+                      '{comment} // {gift}'.format(comment=gift.customer_feedback, gift=gift),
                       settings.SERVER_EMAIL,
                       [email[1] for email in settings.MANAGERS])
 
