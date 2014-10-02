@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.mail import EmailMessage
 
 import os
 
@@ -84,10 +85,12 @@ class Gift(models.Model):
     NEW = 0
     PROCESSING = 1
     SHIPPED = 2
+    RECEIVED = 3
     STATUS_CHOICES = (
         (NEW, 'New'),
         (PROCESSING, 'Processing'),
         (SHIPPED, 'Shipped'),
+        (RECEIVED, 'Received')
     )
     status = models.IntegerField(choices=STATUS_CHOICES, default=NEW)
     asin = models.CharField(max_length=10, blank=True)
@@ -99,7 +102,7 @@ class Gift(models.Model):
     stripe_name = models.CharField(max_length=200, blank=True)
 
     customer_feedback = models.TextField(blank=True)
-    follow_up_sent = models.BooleanField(default=False)
+    send_follow_up = models.BooleanField(default=False)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -120,12 +123,11 @@ class Gift(models.Model):
             curator=self.get_curator_display())
 
     def get_description_text(self):
-        return u"something {theme}, that's {color}, costs about {price} and chosen by a {curator}".format(
+        return u"Something {theme}, that's {color}, costs about {price} and chosen by a {curator}.".format(
             theme=self.get_theme_display(),
             color=self.get_color_display(),
             price=self.get_price_display(),
             curator=self.get_curator_display())
-
 
     def get_amount_cents(self):
         if self.price == 0:
@@ -139,6 +141,16 @@ class Gift(models.Model):
 
         if self.price == 3:
             return 20000
+
+    def send_follow_up(self):
+        msg = EmailMessage(to=[self.stripe_name], bcc=[email[1] for email in settings.MANAGERS])
+        msg.template_name = 'gift-roulette-follow-up'
+        msg.global_merge_vars = {
+                'STORY': self.get_description_text(),
+                'LINK': 'https://giftroulette.me/gift/{private_hash}/'.format(
+                    private_hash=self.private_hash
+                    )}
+        msg.send()
 
 
 class Image(models.Model):
