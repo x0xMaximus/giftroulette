@@ -56,26 +56,3 @@ def thankyou(request, gift_hash):
     return render_to_response('gift/thankyou.jade',
                               {'gift': gift},
                               context_instance=RequestContext(request))
-
-def email(request, gift_hash):
-    gift = get_object_or_404(Gift, private_hash=gift_hash)
-    message = """Email: {email}
-
-Subject: How was your Gift Roulette Experience?
-
-Body:
-
-Hi!
-
-Your gift recipient should have received {story} at {address} by now.
-
-We spent a lot of time stalking online and figuring out a persona to take while selecting this gift. If you have time, please follow the unique link below to upload a some pictures of how the object has become part of the recipient's life for us to show off. Additionally, we'd love any feedback about the curation process from your point of view and what we can do in the future to make the experience better.
-
-http://giftroulette.me/gift/{private_hash}/
-
-Thank you for playing Gift Roulette!
-    - The Gift Roulette team!
-
-http://www.giftroulette.me
-Ordering the craziest shit online just for you since 2014.""".format(email=gift.stripe_name, story=gift.get_description_text(), address=gift.address, private_hash=gift.private_hash)
-    return HttpResponse(message, content_type="text/plain")
