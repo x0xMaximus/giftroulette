@@ -16,14 +16,16 @@ def image_post_save(sender, instance, **kwargs):
     if 'test' not in sys.argv:
 
         if image.gift:
-            send_mail('[Gift Roulette] New Image Uploaded!',
-                        'New upload: http://giftroulette.me{picture} for Gift ID: {gift_id} // {gift}'.format(
-                        picture=image.image.url,
-                        gift_id=image.gift.pk,
-                        gift=image.gift),
-                      settings.SERVER_EMAIL,
-                      [email[1] for email in settings.MANAGERS])
-
+            try:
+                send_mail('[Gift Roulette] New Image Uploaded!',
+                            'New upload: http://giftroulette.me{picture} for Gift ID: {gift_id} // {gift}'.format(
+                            picture=image.image.url,
+                            gift_id=image.gift.pk,
+                            gift=image.gift),
+                          settings.SERVER_EMAIL,
+                          [email[1] for email in settings.MANAGERS])
+            except:
+                print "Error: unable to send mail"
 
 @receiver(post_save, sender=Gift)
 def gift_post_save(sender, instance, **kwargs):
