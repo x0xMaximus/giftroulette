@@ -31,11 +31,20 @@ def gift_post_save(sender, instance, **kwargs):
 
     if 'test' not in sys.argv:
 
+        if gift.send_follow_up and gift.status is gift.RECEIVED:
+            gift.send_follow_up()
+            gift.send_follow_up = False
+            give.save()
+
+
         if gift.customer_feedback:
-            send_mail('[Gift Roulette] New Feedback!',
-                      '{comment} // {gift}'.format(comment=gift.customer_feedback, gift=gift),
-                      settings.SERVER_EMAIL,
-                      [email[1] for email in settings.MANAGERS])
+            try:
+                send_mail('[Gift Roulette] New Feedback!',
+                          '{comment} // {gift}'.format(comment=gift.customer_feedback, gift=gift),
+                          settings.SERVER_EMAIL,
+                          [email[1] for email in settings.MANAGERS])
+            except SMTPException:
+                print "Error: unable to send email"
 
         if not gift.stripe_id:
             stripe.api_key = settings.STRIPE_API_KEY
