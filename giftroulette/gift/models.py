@@ -87,11 +87,13 @@ class Gift(models.Model):
     PROCESSING = 1
     SHIPPED = 2
     RECEIVED = 3
+    REFUNDED = 4
     STATUS_CHOICES = (
         (NEW, 'New'),
         (PROCESSING, 'Processing'),
         (SHIPPED, 'Shipped'),
-        (RECEIVED, 'Received')
+        (RECEIVED, 'Received'),
+        (REFUNDED, 'Refunded'),
     )
     status = models.IntegerField(choices=STATUS_CHOICES, default=NEW)
     asin = models.CharField(max_length=10, blank=True)

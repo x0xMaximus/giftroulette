@@ -36,12 +36,6 @@ def gift_post_save(sender, instance, **kwargs):
             gift.trigger_follow_up = False
             gift.save()
 
-        if gift.customer_feedback:
-            send_mail('[Gift Roulette] New Feedback!',
-                      '{comment} // {gift}'.format(comment=gift.customer_feedback, gift=gift),
-                      settings.SERVER_EMAIL,
-                      [email[1] for email in settings.MANAGERS])
-
         if not gift.stripe_id:
             stripe.api_key = settings.STRIPE_API_KEY
             try:

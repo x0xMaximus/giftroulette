@@ -28,6 +28,13 @@ def gift_read(request, gift_hash):
         form = GiftFeedbackForm(request.POST, instance=gift)
         if form.is_valid():
             gift = form.save()
+            # If they give feedback let us know
+            if gift.customer_feedback:
+                send_mail('[Gift Roulette] New Feedback!',
+                          '{comment} // {gift}'.format(comment=gift.customer_feedback, gift=gift),
+                          settings.SERVER_EMAIL,
+                          [email[1] for email in settings.MANAGERS])
+
             return redirect('giftroulette.gift.views.gift_read', gift.private_hash)
     else:
         form = GiftFeedbackForm(instance=gift)
