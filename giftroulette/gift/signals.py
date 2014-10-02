@@ -16,16 +16,14 @@ def image_post_save(sender, instance, **kwargs):
     if 'test' not in sys.argv:
 
         if image.gift:
-            try:
-                send_mail('[Gift Roulette] New Image Uploaded!',
-                            'New upload: http://giftroulette.me{picture} for Gift ID: {gift_id} // {gift}'.format(
-                            picture=image.image.url,
-                            gift_id=image.gift.pk,
-                            gift=image.gift),
-                          settings.SERVER_EMAIL,
-                          [email[1] for email in settings.MANAGERS])
-            except:
-                print "Error: unable to send mail"
+            send_mail('[Gift Roulette] New Image Uploaded!',
+                        'New upload: http://giftroulette.me{picture} for Gift ID: {gift_id} // {gift}'.format(
+                        picture=image.image.url,
+                        gift_id=image.gift.pk,
+                        gift=image.gift),
+                      settings.SERVER_EMAIL,
+                      [email[1] for email in settings.MANAGERS])
+
 
 @receiver(post_save, sender=Gift)
 def gift_post_save(sender, instance, **kwargs):
@@ -33,20 +31,16 @@ def gift_post_save(sender, instance, **kwargs):
 
     if 'test' not in sys.argv:
 
-        if gift.send_follow_up and gift.status is gift.RECEIVED:
+        if gift.trigger_follow_up and gift.status is gift.RECEIVED:
             gift.send_follow_up()
-            gift.send_follow_up = False
+            gift.trigger_follow_up = False
             give.save()
 
-
         if gift.customer_feedback:
-            try:
-                send_mail('[Gift Roulette] New Feedback!',
-                          '{comment} // {gift}'.format(comment=gift.customer_feedback, gift=gift),
-                          settings.SERVER_EMAIL,
-                          [email[1] for email in settings.MANAGERS])
-            except:
-                print "Error: unable to send email"
+            send_mail('[Gift Roulette] New Feedback!',
+                      '{comment} // {gift}'.format(comment=gift.customer_feedback, gift=gift),
+                      settings.SERVER_EMAIL,
+                      [email[1] for email in settings.MANAGERS])
 
         if not gift.stripe_id:
             stripe.api_key = settings.STRIPE_API_KEY
