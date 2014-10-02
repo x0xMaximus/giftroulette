@@ -10,8 +10,8 @@ class ImageAdmin(admin.ModelAdmin):
 
 
 class GiftAdmin(admin.ModelAdmin):
-    list_display = ('private_hash', 'theme', 'color',
-                    'price' , 'curator', 'status',
+    list_display = ('private_hash', 'status', 'theme',
+                    'color', 'price' , 'curator',
                     'created', 'stripe_name', 'address',
                     'asin', 'customer_feedback', 'updated')
 
