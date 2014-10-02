@@ -43,7 +43,7 @@ def gift_post_save(sender, instance, **kwargs):
                           '{comment} // {gift}'.format(comment=gift.customer_feedback, gift=gift),
                           settings.SERVER_EMAIL,
                           [email[1] for email in settings.MANAGERS])
-            except SMTPException:
+            except:
                 print "Error: unable to send email"
 
         if not gift.stripe_id:
