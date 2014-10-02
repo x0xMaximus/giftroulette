@@ -2,10 +2,6 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.flatpages import views
 
-
-from djrill import DjrillAdminSite
-admin.site = DjrillAdminSite()
-
 urlpatterns = patterns('',
     url(r'^$', 'giftroulette.gift.views.home', name='home'),
 
