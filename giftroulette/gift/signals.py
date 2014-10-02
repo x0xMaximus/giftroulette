@@ -34,7 +34,7 @@ def gift_post_save(sender, instance, **kwargs):
         if gift.trigger_follow_up and gift.status is gift.RECEIVED:
             gift.send_follow_up()
             gift.trigger_follow_up = False
-            give.save()
+            gift.save()
 
         if gift.customer_feedback:
             send_mail('[Gift Roulette] New Feedback!',
