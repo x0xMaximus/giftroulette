@@ -1,5 +1,5 @@
 Django==1.7
-Pillow==2.5.3
+Pillow==2.6.0
 Werkzeug==0.9.6
 django-extensions==1.4.0
 django-grappelli==2.6.1
@@ -8,13 +8,13 @@ djrill==1.2.0
 flake8==2.2.3
 gnureadline==6.3.3
 gunicorn==19.1.1
-ipython==2.2.0
+ipython==2.3.0
 mccabe==0.2.1
 pep8==1.5.7
 pyflakes==0.8.1
 pyjade==3.0.0
 requests==2.4.1
 selenium==2.43.0
-six==1.7.3
+six==1.8.0
 stripe==1.19.0
 wsgiref==0.1.2
